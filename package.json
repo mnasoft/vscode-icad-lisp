@@ -51,7 +51,11 @@
 			{
 				"command": "icad.loadProjectFiles",
 				"category": "LISP",
-				"title": "%icad-lisp.loadprojectfiles.title%"
+				"title": "%icad-lisp.loadprojectfiles.title%",
+				"icon": {
+					"dark": "images/dark/Load_to_AutoCAD.svg",
+					"light": "images/light/Load_to_AutoCAD.svg"
+				}
 			},
 			{
 				"command": "icad.openWebHelp",
@@ -265,7 +269,7 @@
 					"comments": false,
 					"strings": true
 				},
-				"editor.wordBasedSuggestions": true,
+				"editor.wordBasedSuggestions": "matchingDocuments",
 				"editor.autoIndent": "none",
 				"editor.formatOnType": true,
 				"files.encoding": "utf8",
@@ -276,7 +280,7 @@
 			"[icad-lisp]": {
 				"files.autoGuessEncoding": true,
 				"editor.tabSize": 2,
-				"editor.wordBasedSuggestions": true,
+				"editor.wordBasedSuggestions": "matchingDocuments",
 				"editor.detectIndentation": false,
 				"editor.quickSuggestions": {
 					"other": true,
@@ -299,7 +303,7 @@
 					"comments": false,
 					"strings": true
 				},
-				"editor.wordBasedSuggestions": false,
+				"editor.wordBasedSuggestions": "off",
 				"editor.suggest.showWords": false,
 				"editor.suggest.showProperties": false,
 				"editor.autoIndent": "brackets",
@@ -446,12 +450,14 @@
 				{
 					"id": "Icad-ProjectView",
 					"name": "%icad-lisp.project.projectview.name%",
-					"when": ""
+					"icon": "images/Project_Management.svg",
+					"when": "true"
 				},
 				{
 					"id": "Icad-FindReplaceView",
 					"name": "%icad-lisp.project.findreplaceview.name%",
-					"when": ""
+					"icon": "images/Project_Management.svg",
+					"when": "true"
 				}
 			]
 		},
