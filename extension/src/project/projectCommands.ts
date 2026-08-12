@@ -185,6 +185,58 @@ export function registerProjectCommands(context: vscode.ExtensionContext) {
                 });
         }));
 
+        context.subscriptions.push(vscode.commands.registerCommand('icad.loadProjectFiles', async () => {
+            if (getWarnIsSearching())
+                return;
+
+            if (!ProjectTreeProvider.hasProjectOpened()) {
+                const msg = localize("icad-lisp.project.commands.loadall.openproject", "Open a project before loading project files.");
+                vscode.window.showErrorMessage(msg);
+                return;
+            }
+
+            const session = vscode.debug.activeDebugSession;
+            if (!session) {
+                const msg = localize("icad-lisp.project.commands.loadall.attach", "First, attach to or launch a host application before loading project files.");
+                vscode.window.showErrorMessage(msg);
+                return;
+            }
+
+            const projectNode = ProjectTreeProvider.instance().projectNode;
+            const existingLspFiles = projectNode.sourceFiles
+                .map(fileNode => fileNode.filePath)
+                .filter(filePath => filePath.toUpperCase().endsWith('.LSP') && fs.existsSync(filePath));
+
+            if (existingLspFiles.length === 0) {
+                const msg = localize("icad-lisp.project.commands.loadall.nofiles", "No existing LSP files were found in the project.");
+                vscode.window.showInformationMessage(msg);
+                return;
+            }
+
+            let loadedCount = 0;
+            let failedCount = 0;
+
+            for (const filePath of existingLspFiles) {
+                try {
+                    await session.customRequest("customLoad", { path: filePath });
+                    loadedCount++;
+                }
+                catch (err) {
+                    failedCount++;
+                    console.log(err);
+                }
+            }
+
+            if (failedCount > 0) {
+                const msg = localize("icad-lisp.project.commands.loadall.partial", "Loaded {0} file(s); failed to load {1} file(s).", loadedCount, failedCount);
+                vscode.window.showWarningMessage(msg);
+                return;
+            }
+
+            const msg = localize("icad-lisp.project.commands.loadall.success", "Loaded {0} project file(s).", loadedCount);
+            vscode.window.showInformationMessage(msg);
+        }));
+
         context.subscriptions.push(vscode.commands.registerCommand('icad.SaveAll', async () => {
             if (getWarnIsSearching())
                 return;

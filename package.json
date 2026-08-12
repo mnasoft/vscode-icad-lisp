@@ -36,6 +36,7 @@
 		"onDebug",
 		"onUri",
 		"onCommand:icad.loadActiveFile",
+		"onCommand:icad.loadProjectFiles",
 		"onLanguage:icad-lisp",
 		"onLanguage:icad-dcl",
 		"onView:Icad-ProjectView"
@@ -46,6 +47,11 @@
 				"command": "icad.loadActiveFile",
 				"category": "LISP",
 				"title": "%icad-lisp.loadcurrentfile.title%"
+			},
+			{
+				"command": "icad.loadProjectFiles",
+				"category": "LISP",
+				"title": "%icad-lisp.loadprojectfiles.title%"
 			},
 			{
 				"command": "icad.openWebHelp",
@@ -467,6 +473,11 @@
 					"when": "view == Icad-ProjectView && icad.hasProject"
 				},
 				{
+					"command": "icad.loadProjectFiles",
+					"group": "navigation@4",
+					"when": "view == Icad-ProjectView && icad.hasProject"
+				},
+				{
 					"command": "icad.refresh",
 					"group": "navigation@6",
 					"when": "view == Icad-ProjectView && icad.hasProject"
@@ -505,23 +516,28 @@
 				},
 				{
 					"when": "view == Icad-ProjectView && viewItem == project",
-					"command": "icad.refresh",
+					"command": "icad.loadProjectFiles",
 					"group": "navigation@2"
 				},
 				{
 					"when": "view == Icad-ProjectView && viewItem == project",
-					"command": "icad.SaveProject",
+					"command": "icad.refresh",
 					"group": "navigation@3"
 				},
 				{
 					"when": "view == Icad-ProjectView && viewItem == project",
-					"command": "icad.SaveAll",
+					"command": "icad.SaveProject",
 					"group": "navigation@4"
 				},
 				{
 					"when": "view == Icad-ProjectView && viewItem == project",
-					"command": "icad.closeProject",
+					"command": "icad.SaveAll",
 					"group": "navigation@5"
+				},
+				{
+					"when": "view == Icad-ProjectView && viewItem == project",
+					"command": "icad.closeProject",
+					"group": "navigation@6"
 				},
 				{
 					"when": "view == Icad-ProjectView && viewItem == lspFile",

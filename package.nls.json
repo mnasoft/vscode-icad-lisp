@@ -1,6 +1,7 @@
 {
 	"icad-lisp.description": "The Visual Studio Code Extension for IntelliCAD Lisp",
 	"icad-lisp.loadcurrentfile.title": "Load File into IntelliCAD",
+	"icad-lisp.loadprojectfiles.title": "Load Project Files into IntelliCAD",
 	"icad-lisp.openwebhelp.title": "Open Online Help",
 	"icad-lisp.regionsnippet.title": "Insert Region",
 	"icad-lisp.commentdefun.title": "Generate Documentation",
